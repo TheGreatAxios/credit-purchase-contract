@@ -21,7 +21,9 @@ contract CreditPurchase is Ownable, Pausable, ReentrancyGuard {
     event CreditPriceSet(address indexed creditToken, uint256 price);
     event CreditsBought(address indexed creditToken, uint256 amount, uint256 price);
 
-    constructor(address _owner) Ownable(_owner) {}
+    constructor(address _owner, address _paymentReceiver) Ownable(_owner) {
+        paymentReceiver = _paymentReceiver;
+    }
 
     function setCreditPrice(address _creditToken, uint256 _price) external onlyOwner {
         paymentAmounts[_creditToken] = _price;
